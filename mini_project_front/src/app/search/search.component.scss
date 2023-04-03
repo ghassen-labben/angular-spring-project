@@ -1,0 +1,17 @@
+.search {
+    height: 100vh;
+}
+
+ul::-webkit-scrollbar {
+    width: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background-color: rgb(33, 118, 230);
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+}

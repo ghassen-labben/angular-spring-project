@@ -1,0 +1,147 @@
+<div class="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+  <div class="bg-gray-100 text-gray-500 h-3/4 rounded-3xl shadow-xl w-full overflow-hidden">
+    <div class="md:flex w-full">
+      <div class="hidden md:block w-1/2 h-1/2 bg-indigo-500 ">
+        <img class="w-full "
+          src="https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fHBhdHRlcm58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+          alt="">
+      </div>
+      <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
+        <div class="text-center mb-10">
+          <h1 class="font-bold text-3xl text-gray-900">REGISTER</h1>
+          <p>Enter your information to register</p>
+        </div>
+        <form [formGroup]="WorkerForm" (ngSubmit)="onSubmit()">
+          <div class="flex -mx-3">
+            <div class="w-1/2 px-3 mb-5">
+              <label for="" class="text-xs font-semibold px-1">User Name</label>
+              <div class="flex">
+                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                    class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
+                <input type="text"
+                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                  placeholder="John" formControlName="name">
+              </div>
+            </div>
+            <div class="w-1/2 px-3 mb-5">
+              <label for="" class="text-xs font-semibold px-1">Profile Image</label>
+              <div class="flex">
+                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                    class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
+                <input type="file"
+                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                  placeholder="Smith" (change)="onFileChanged($event)">
+              </div>
+
+            </div>
+          </div>
+          <div class="flex -mx-3">
+            <div class="w-full px-3 mb-5">
+              <label for="" class="text-xs font-semibold px-1">Email</label>
+              <div class="flex">
+                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                    class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+                <input type="email"
+                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                  placeholder="johnsmith@example.com" formControlName="email">
+              </div>
+            </div>
+          </div>
+          <div class="w-full px-3 mb-5">
+            <label for="" class="text-xs font-semibold px-1">PhoneNumber</label>
+            <div class="flex">
+              <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                  class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+              <input type="email"
+                class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="johnsmith@example.com" formControlName="phoneNumber">
+            </div>
+          </div>
+          <div class="flex -mx-3">
+            <div class="w-full px-3 mb-12">
+              <label for="" class="text-xs font-semibold px-1">Password</label>
+              <div class="flex">
+                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                    class="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
+                <input type="password"
+                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                  placeholder="************" formControlName="password">
+              </div>
+            </div>
+            <div class="w-full px-3 mb-12">
+              <label for="" class="text-xs font-semibold px-1">Confirm Password</label>
+              <div class="flex">
+                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i
+                    class="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
+                <input type="password"
+                  class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                  placeholder="************">
+              </div>
+
+            </div>
+            <div>
+              <label for="" class="text-xs font-semibold px-1">Location</label>
+              <div class="flex">
+                <select name="" formControlName="location">
+                  <option *ngFor="let s of states; let i = index" [value]="s">
+                    {{s}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex -mx-3 flex-col">
+            <div class="w-full mb-5 ">
+              <input type="checkbox" name="" id="" formControlName="pro">
+              <label class="text-2xl font-medium px-5" for="">I'm a Worker</label>
+            </div>
+
+            <div *ngIf="WorkerForm.value.pro" class="w-full px-3 mb-12">
+              <label for="" class="text-xs font-semibold px-1">Service</label>
+              <div class="flex">
+                <select name="" id="" formControlName="idService">
+                  <option [value]="s.id" *ngFor="let s of services">
+                    {{s.name}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="  my-2 border    border-[2px]  w-10/12 justify-center flex items-center rounded-md shadow-md">
+                <div>
+                  <button type=" submit"
+                    class="flex items-center bg-gray-100 rounded-l-md border border-white justify-center w-12 h-12 text-white "
+                    :class="(search.length > 0) ? 'bg-purple-500' : 'bg-gray-500 cursor-not-allowed'"
+                    :disabled="search.length == 0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="  w-full">
+                  <input type="number" x-model="input3"
+                    class="w-1/2 h-12 px-4 py-1  border border-gray-100 text-gray-800 focus:outline-none"
+                    placeholder="Salary/day" formControlName="daily_price">
+                </div>
+              </div>
+              <div>
+                <label for="" class="block font-bold my-2 ">Expertise</label>
+                <textarea name="" id="" cols="70" rows="5" formControlName="expertise"></textarea>
+              </div>
+
+            </div>
+
+            <div class="w-full px-3 mb-5">
+              <button type="submit"
+                class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">REGISTER
+                NOW</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

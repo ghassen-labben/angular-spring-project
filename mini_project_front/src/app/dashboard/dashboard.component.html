@@ -1,0 +1,138 @@
+<body class="flex bg-gray-100 min-h-screen">
+    <div class="flex-grow text-gray-800">
+
+        <main class="p-6 sm:p-10 space-y-6">
+            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
+                <div class="mr-6">
+                    <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
+                </div>
+            </div>
+            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold">{{workers.length}}</span>
+                        <span class="block text-gray-500">workers</span>
+                    </div>
+                </div>
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold">{{jobs.length}}</span>
+                        <span class="block text-gray-500">Services</span>
+                    </div>
+                </div>
+
+
+            </section>
+            <section class="grid  w-full">
+                <div class="row-span-3 bg-white shadow rounded-lg">
+                    <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                        <span>Workers </span>
+
+                    </div>
+                    <div class="overflow-y-auto" style="max-height: 24rem;">
+                        <ul class="p-6 space-y-6">
+                            <li class="flex items-center" *ngFor="let w of workers">
+                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <img src="data:image/jpeg;base64,{{w.image.picByte}}"
+                                        alt="Annette Watson profile picture">
+                                </div>
+                                <span class="text-gray-600">{{w.name}}</span>
+                                <span class="ml-auto font-semibold">9.3</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="w-full bg-white shadow px-5 flex justify-between flex-col">
+                <h2 class="text-2xl font-bold">Services </h2>
+                <div *ngFor="let j of jobs,index as i" class="flex justify-around shadow shadow-gray">
+                    <img src="data:image/jpeg;base64,{{j.image.picByte}}" class="w-10 h-10 overflow-hidden rounded-full"
+                        alt="">
+                    <p>
+                        {{j.name}}
+
+                    </p>
+                    <textarea class="overflow-auto ">
+                        {{j.description}}
+                    </textarea>
+                    <p>
+                        {{j.price}}
+                    </p>
+                </div>
+            </section>
+            <section class="grid  w-full">
+                <div class="row-span-3 bg-white shadow rounded-lg">
+                    <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                        <span>Add Service </span>
+
+                    </div>
+                    <div class="overflow-y-auto ">
+                        <form (submit)="onSubmit()" class="mx-5 flex justify-between items-center">
+                            <label class="text-gray-600 font-bold mr-2">Title</label>
+
+                            <div>
+                                <input type="text" name="name" [(ngModel)]="job.name" required
+                                    class="h-12 p-2 border-2 border-gray-600 text-gray-800 focus:outline-none">
+                            </div>
+                            <label class="text-gray-600 font-bold ml-2">Description</label>
+
+                            <div>
+
+                                <textarea name="description" [(ngModel)]="job.description" required
+                                    class=" h-12 px-4 py-1 mx-2 border border-gray-100 text-gray-800 focus:outline-none border-2 border-gray-600 "></textarea>
+
+                            </div>
+                            <label class="text-gray-600 font-bold ">Average Price</label>
+
+                            <div>
+
+                                <input type="number" name="price" [(ngModel)]="job.price" required
+                                    class=" h-12 px-4 py-1 mx-3 border border-gray-100 text-gray-800 focus:outline-none border-2 border-gray-600 ">
+
+                            </div>
+                            <label class="text-gray-600 font-bold ">Image</label>
+
+                            <div>
+                                <div class="flex items-center justify-center ">
+                                    <input id="dropzone-file" type="file"
+                                        class="w-full h-12 px-4 py-1 mx-2 border border-gray-100 text-gray-800 focus:outline-none border-2 border-gray-600 "
+                                        name="image" (change)="onFileSelected($event)" />
+                                </div>
+
+                            </div>
+                            <button
+                                class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+                                type="su
+                                ">
+                                <span class="mr-2">Add</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
